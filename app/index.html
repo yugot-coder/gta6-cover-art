@@ -3,20 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Coast — GTA-style Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="controls" aria-label="Cover controls">
+    <header class="brand">
+      <h1>Neon Coast</h1>
+      <p class="tagline">GTA-style cover maker. Offline — your photos never leave your machine.</p>
+    </header>
+
+    <section class="group" aria-label="Photos">
+      <h2>1 · Photos</h2>
+      <label class="file-btn">Add your photos
+        <input id="photoInput" type="file" accept="image/*" multiple>
+      </label>
+      <button id="sampleBtn" type="button">Use sample photos</button>
+      <div id="tray" class="tray" aria-label="Photo tray"></div>
+      <div class="row">
+        <button id="fillAllBtn" type="button">Fill all panels</button>
+        <button id="spreadBtn" type="button">Spread photos</button>
+      </div>
+      <p class="hint">Click a panel in the preview, then a photo here to fill it. Drag the preview to move a photo inside its panel; scroll to zoom it.</p>
+    </section>
+
+    <section class="group" aria-label="Layout">
+      <h2>2 · Layout</h2>
+      <div id="layoutRow" class="choice-row" role="group" aria-label="Layout"></div>
+    </section>
+
+    <section class="group" aria-label="Colour grade">
+      <h2>3 · Colour grade</h2>
+      <div id="gradeRow" class="choice-row" role="group" aria-label="Colour grade"></div>
+    </section>
+
+    <section class="group" aria-label="Words">
+      <h2>4 · Words</h2>
+      <label>Title <input id="titleInput" type="text" maxlength="24" value="NEON COAST"></label>
+      <label>Subtitle <input id="subtitleInput" type="text" maxlength="40" value="chasing the neon sunset"></label>
+      <label>Badge <input id="badgeInput" type="text" maxlength="16" value="LAUNCH WEEK"></label>
+      <label>Heat
+        <select id="starsInput">
+          <option value="5" selected>★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+          <option value="0">No stars</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="group" aria-label="Selected panel">
+      <h2>5 · Selected panel</h2>
+      <p id="panelLabel" class="hint">Panel 1 of 4</p>
+      <label>Zoom <input id="zoomRange" type="range" min="1" max="3" step="0.05" value="1"></label>
+      <button id="resetCropBtn" type="button">Reset crop</button>
+    </section>
+
+    <section class="group" aria-label="Effects">
+      <h2>6 · Effects</h2>
+      <label class="check"><input id="grainCheck" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignetteCheck" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="halftoneCheck" type="checkbox" checked> Halftone title</label>
+    </section>
+
+    <section class="group" aria-label="Export">
+      <h2>7 · Export</h2>
+      <div id="sizeRow" class="choice-row" role="group" aria-label="Export size"></div>
+      <button id="exportAllBtn" type="button" class="primary">Export all 3 PNGs</button>
+      <button id="exportOneBtn" type="button">Export this size</button>
+      <div class="row">
+        <button id="undoBtn" type="button" disabled>Undo</button>
+        <button id="redoBtn" type="button" disabled>Redo</button>
+      </div>
+      <p id="status" role="status"></p>
+    </section>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <section class="preview" aria-label="Live preview">
+    <canvas id="preview" width="1080" height="1080" aria-label="The cover"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
